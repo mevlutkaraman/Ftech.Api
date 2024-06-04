@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Contracts\Commands\" />
+    <Folder Include="Contracts\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Ftech.Infrastructure.MQ.RabbitMQ\Ftech.Infrastructure.MQ.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Ftech.Services\Ftech.Services.csproj" />
+  </ItemGroup>
+
+</Project>
