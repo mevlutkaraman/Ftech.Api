@@ -14,6 +14,7 @@ namespace Ftech.Infrastructure.MQ.RabbitMQ
             services.AddScoped<IObjectConvertFormat, ObjectConvertFormat>();
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IConsumerService, ConsumerService>();
+            services.AddScoped<IMQConfiguration, MQConfiguration>();
 
             return services;
         }

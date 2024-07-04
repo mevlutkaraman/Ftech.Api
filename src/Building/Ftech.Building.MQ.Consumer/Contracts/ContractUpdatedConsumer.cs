@@ -11,7 +11,7 @@ namespace Ftech.Building.MQ.Consumer.Contracts
     {
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask; 
         }
     }
 }

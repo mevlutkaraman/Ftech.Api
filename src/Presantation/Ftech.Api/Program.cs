@@ -13,9 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-builder.Services.AddApplications();
 builder.Services.AddServices();
+builder.Services.AddApplications();
 builder.Services.AddRabbitMQ();
 builder.Services.AddConsumers();
 
@@ -29,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

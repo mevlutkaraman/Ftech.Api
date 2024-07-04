@@ -19,10 +19,11 @@ namespace Ftech.Infrastructure.RabbitMQ.Concrete
             {
                 var factory = new ConnectionFactory
                 {
-                    HostName = _rabbitMqConfiguration.HostName,
-                    UserName = _rabbitMqConfiguration.UserName,
-                    Password = _rabbitMqConfiguration.Password,
-                    Port = _rabbitMqConfiguration.Port,
+                    //HostName = _rabbitMqConfiguration.HostName,
+                    //UserName = _rabbitMqConfiguration.UserName,
+                    //Password = _rabbitMqConfiguration.Password,
+                    //Port = _rabbitMqConfiguration.Port,
+                    Uri = new Uri(_rabbitMqConfiguration.Url),
                     AutomaticRecoveryEnabled = true,
                     NetworkRecoveryInterval = TimeSpan.FromSeconds(10),
                     TopologyRecoveryEnabled = false,

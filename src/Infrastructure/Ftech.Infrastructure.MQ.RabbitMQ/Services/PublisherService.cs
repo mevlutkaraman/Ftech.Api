@@ -18,7 +18,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
             _objectConvertFormat = objectConvertFormat;
         }
 
-        public void PublishExchange<T>(T queueDataModel, string exchangeName, string exchangeType, IPublisherLogger? logger = null) where T : class, new()
+        public void PublishExchange<T>(T model, string exchangeName, string exchangeType, IPublisherLogger? logger = null) where T : class, new()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
                     properties.Persistent = true;
                     properties.Expiration = MQDefaults.MessagesTTL.ToString();
 
-                    var body = Encoding.UTF8.GetBytes(_objectConvertFormat.ObjectToJson(queueDataModel));
+                    var body = Encoding.UTF8.GetBytes(_objectConvertFormat.ObjectToJson(model));
                     _channel.BasicPublish(exchange: exchangeName,
                         routingKey: string.Empty,
                         mandatory: false,
@@ -38,7 +38,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
                         body: body);
 
                     if (logger is not null)
-                        logger.Log();
+                        logger.Log(model);
                 }
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
             }
         }
 
-        public void SendQueue<T>(T queueDataModel, string queueName, IPublisherLogger? logger = null) where T : class, new()
+        public void SendQueue<T>(T model, string queueName, IPublisherLogger? logger = null) where T : class, new()
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
                     properties.Persistent = true;
                     properties.Expiration = MQDefaults.MessagesTTL.ToString();
 
-                    var body = Encoding.UTF8.GetBytes(_objectConvertFormat.ObjectToJson(queueDataModel));
+                    var body = Encoding.UTF8.GetBytes(_objectConvertFormat.ObjectToJson(model));
                     _channel.BasicPublish(exchange: string.Empty,
                         routingKey: queueName,
                         mandatory: false,
@@ -67,7 +67,7 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
                         body: body);
 
                     if (logger is not null)
-                        logger.Log();
+                        logger.Log(model);
                 }
             }
             catch (Exception ex)

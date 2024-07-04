@@ -20,16 +20,17 @@ namespace Ftech.Application.Contracts.EventHandlers
         public async Task Handle(ContractAddedDomainEvent notification, CancellationToken cancellationToken)
         {
             var model = notification.Contract;
-            string key = "test";
+            string key = "ftech-api-finance-contract-added";
             _publisherService.SendQueue(model, key, new ContractPublisherLogger());
         }
     }
 
     class ContractPublisherLogger : IPublisherLogger
     {
-        public void Log()
+
+        public void Log<T>(T model) 
         {
-            //Db log 
+            
         }
     }
 }

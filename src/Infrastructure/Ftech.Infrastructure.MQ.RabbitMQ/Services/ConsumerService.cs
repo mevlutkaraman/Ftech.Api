@@ -15,8 +15,8 @@ namespace Ftech.Infrastructure.MQ.RabbitMQ.Services
     {
         private readonly IMQService _rabbitMQServices;
         private readonly IObjectConvertFormat _objectConvertFormat;
-        private IModel _channel;
-        private IConnection _connection;
+        private IModel _channel = null!;
+        private IConnection _connection = null!;
 
         public ConsumerService(IMQService rabbitMqServices, IObjectConvertFormat objectConvertFormat)
         {
@@ -37,16 +37,16 @@ namespace Ftech.Infrastructure.MQ.RabbitMQ.Services
                     {
                         var body = ea.Body.ToArray();
                         var message = Encoding.UTF8.GetString(body);
+
+                        if (logger is not null)
+                            logger.Log(message);
+
                         processMessage(message);
-                       _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     };
 
                     _channel.BasicConsume(queue: queueName,
-                                         autoAck: false,
+                                         autoAck: true,
                                          consumer: consumer);
-
-                    if (logger is not null)
-                        logger.Log();
                 }
             }
             catch (Exception ex)

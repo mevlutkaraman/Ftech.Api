@@ -28,7 +28,7 @@ namespace Ftech.Services.Contracts
         public async Task UpdateContractAsync(Contract contract)
         {
             //Logic
-            await _mediator.Publish(new ContractDeletedDomainEvent(contract));
+            await _mediator.Publish(new ContractUpdatedDomainEvent(contract));
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Ftech.Infrastructure.MQ.RabbitMQ.Services
 {
     public interface IConsumerLogger
     {
-        void Log();
+        void Log(string message);
     }
 }

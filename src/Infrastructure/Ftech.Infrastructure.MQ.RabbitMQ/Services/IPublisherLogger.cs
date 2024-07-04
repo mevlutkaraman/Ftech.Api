@@ -8,6 +8,6 @@ namespace Ftech.Infrastructure.RabbitMQ.Services
 {
     public interface IPublisherLogger
     {
-        void Log(); //Parameters
+        void Log<T>(T model);//Parameters
     }
 }
